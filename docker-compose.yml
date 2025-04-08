@@ -1,0 +1,79 @@
+version: '3.9'
+
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: datn-database
+    ports:
+      - 1445:1433
+    environment:
+      MSSQL_SA_PASSWORD: ComplexP@ssw0rd
+      MSSQL_DATABASE: final
+      ACCEPT_EULA: Y
+      TZ: Asia/Ho_Chi_Minh
+    restart: always
+    command: >
+      /bin/bash -c "
+      /opt/mssql/bin/sqlservr &
+         
+      echo '>>>>>>>>>> SQL Server is ready - executing init script <<<<<<<<<<';
+      /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'ComplexP@ssw0rd' -C -d master -i /tmp/init-database.sql &&
+      /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'ComplexP@ssw0rd' -C -d master -i /tmp/table-database.sql &&
+      /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'ComplexP@ssw0rd' -C -d master -i /tmp/extra-database.sql;
+
+      sleep infinity;
+      "
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "ComplexP@ssw0rd", "-Q", "SELECT 1", "-C"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 10s
+    volumes:
+      - ./init-database.sql:/tmp/init-database.sql:ro
+      - ./table-database.sql:/tmp/table-database.sql:ro
+      - ./extra-database.sql:/tmp/extra-database.sql:ro
+    networks:
+      - dev
+
+  server:
+    build:
+      context: .
+      dockerfile: docker/be/Dockerfile
+
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://database:1433;databaseName=final;encrypt=true;trustServerCertificate=true;
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: ComplexP@ssw0rd
+      TZ: Asia/Ho_Chi_Minh
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+    networks:
+      - dev
+
+  client:
+    build:
+      context: .
+      dockerfile: docker/fe/Dockerfile
+    ports:
+      - 5173:5173
+    environment:
+      TZ: Asia/Ho_Chi_Minh
+    depends_on:
+      - server
+    networks:
+      - dev
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+networks:
+  dev:
+    driver: bridge
+
+volumes:
+  sql_data:
+    name: sql_data

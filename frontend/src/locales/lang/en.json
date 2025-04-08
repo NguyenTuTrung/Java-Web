@@ -1,0 +1,45 @@
+{
+    "nav": {
+        "home": "Trang chủ",
+
+        "settingTitle": "Cài đặt",
+        "manageTitle": "Quản lý",
+
+        "customerTitle": "Khách hàng",
+        "productTitle": "Sản phẩm",
+        "staffTitle": "Nhân viên",
+        "voucherTitle": "Phiếu giảm giá",
+        "orderTitle": "Hóa đơn",
+        "eventTitle": "Đợt giảm giá",
+
+        "propertiesTitle": "Thuộc tính",
+        "brandTitle": "Thương hiệu",
+        "originTitle": "Xuất xứ",
+        "styleTitle": "Kiểu dáng",
+        "materialTitle": "Chất liệu",
+        "collarTitle": "Cổ áo",
+        "sleeveTitle": "Tay áo",
+        "textureTitle": "Kết cấu",
+        "thicknessTitle": "Độ dày",
+        "elasticityTitle": "Co dãn",
+        "sizeTitle": "Kích cỡ",
+        "colorTitle": "Màu sắc",
+
+        "singleMenuItem": "Single menu item",
+        "collapseMenu": {
+            "collapseMenu": "Collapse menu item",
+            "item1": "Collapse menu item 1",
+            "item2": "Collapse menu item 2"
+        },
+        "groupMenu": {
+            "groupMenu": "Group menu",
+            "single": "Cấu hình",
+            "collapse": {
+                "collapse": "Tài liệu",
+                "item1": "Group collapse menu item 1",
+                "item2": "Group collapse menu item 2"
+            }
+        },
+        "sellTitle": "Bán hàng"
+    }
+}

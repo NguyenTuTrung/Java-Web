@@ -1,0 +1,32 @@
+@import "./assets/styles/app.css";
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    /* Độ rộng của thanh cuộn */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Màu nền của track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Màu của thanh cuộn */
+    border-radius: 10px;
+    /* Bo góc thanh cuộn */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Màu của thanh cuộn khi hover */
+}
+
+.custom-datepicker {
+    height: 44px !important;
+}
+.no-scroll {
+    overflow: hidden;
+}

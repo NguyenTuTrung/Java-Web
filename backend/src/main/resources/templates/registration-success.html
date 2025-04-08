@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Đăng ký thành công</title>
+    <style>
+        /* CSS cho email */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 24px;
+        }
+        .content {
+            padding: 30px;
+            line-height: 1.8;
+            color: #333;
+        }
+        .content p {
+            margin: 15px 0;
+        }
+        .content a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .content a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Chúc mừng bạn đã đăng ký thành công!</h1>
+    </div>
+    <div class="content">
+        <p>Xin chào <strong th:text="${username}"></strong>,</p>
+        <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi. Chúng tôi rất vui được chào đón bạn.</p>
+        <p>Bạn có thể truy cập vào trang web của chúng tôi tại đường dẫn dưới đây:</p>
+        <p><a th:href="${websiteUrl}" th:text="${websiteUrl}"></a></p>
+        <p>Nếu bạn có bất kỳ câu hỏi hoặc cần hỗ trợ, vui lòng liên hệ với chúng tôi qua email hoặc số điện thoại hỗ trợ.</p>
+    </div>
+    <div class="footer">
+        <p>Trân trọng,</p>
+        <p>Đội ngũ hỗ trợ CANTH</p>
+        <p><a href="mailto:support@canth.vn">support@canth.vn</a> | 0123-456-789</p>
+    </div>
+</div>
+</body>
+</html>
